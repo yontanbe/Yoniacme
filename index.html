@@ -17,41 +17,72 @@
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
-  <script>
-(function(apiKey){
-    (function(p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{};o._q=o._q||[];
-    v=['initialize','identify','updateOptions','pageLoad','track'];for(w=0,x=v.length;w<x;++w)(function(m){
-        o[m]=o[m]||function(){o._q[m===v[0]?'unshift':'push']([m].concat([].slice.call(arguments,0)));};})(v[w]);
-        y=e.createElement(n);y.async=!0;y.src='https://cdn.pendo.io/agent/static/'+apiKey+'/pendo.js';
-        z=e.getElementsByTagName(n)[0];z.parentNode.insertBefore(y,z);})(window,document,'script','pendo');
+ 
+<script>
+    (function(apiKey) {
+        (function(p, e, n, d, o) {
+            var v, w, x, y, z;
+            o = p[d] = p[d] || {};
+            o._q = o._q || [];
+            v = ['initialize', 'identify', 'updateOptions', 'pageLoad', 'track'];
+            for (w = 0, x = v.length; w < x; ++w)(function(m) {
+                o[m] = o[m] || function() {
+                    o._q[m === v[0] ? 'unshift' : 'push']([m].concat([].slice.call(arguments, 0)));
+                };
+            })(v[w]);
+            y = e.createElement(n);
+            y.async = !0;
+            y.src = 'https://cdn.pendo.io/agent/static/' + apiKey + '/pendo.js';
+            z = e.getElementsByTagName(n)[0];
+            z.parentNode.insertBefore(y, z);
+        })(window, document, 'script', 'pendo');
 
-        // Call this whenever information about your visitors becomes available
-        // Please use Strings, Numbers, or Bools for value types.
+        // List of users and their corresponding companies
+        var userData = [
+            {name: 'emma.white', role: 'CEO', company: 'ByteBlaze', domain: '@byteblaze.com'},
+            {name: 'john.doe', role: 'Developer', company: 'TechWorld', domain: '@techworld.com'},
+            {name: 'jane.smith', role: 'Designer', company: 'DesignCo', domain: '@designco.com'},
+            {name: 'alan.turing', role: 'Analyst', company: 'ComputeTech', domain: '@computetech.com'},
+            {name: 'grace.hopper', role: 'Manager', company: 'CodeBase', domain: '@codebase.com'},
+            {name: 'michael.scott', role: 'Manager', company: 'PaperInc', domain: '@paperinc.com'},
+            {name: 'pam.beesly', role: 'Sales', company: 'ArtWorld', domain: '@artworld.com'},
+            {name: 'jim.halpert', role: 'Sales', company: 'SportzCo', domain: '@sportzco.com'},
+            {name: 'dwight.schrute', role: 'Assistant Manager', company: 'FarmTech', domain: '@farmtech.com'},
+            {name: 'angela.martin', role: 'Accountant', company: 'CatLovers', domain: '@catlovers.com'},
+            {name: 'kevin.malone', role: 'Accountant', company: 'Foodies', domain: '@foodies.com'},
+            {name: 'oscar.martinez', role: 'Accountant', company: 'FinTech', domain: '@fintech.com'},
+            {name: 'ryan.howard', role: 'Sales', company: 'TechNow', domain: '@technow.com'},
+            {name: 'kelly.kapoor', role: 'Customer Relations', company: 'FashionCorp', domain: '@fashioncorp.com'},
+            {name: 'toby.flenderson', role: 'HR', company: 'HRWorld', domain: '@hrworld.com'},
+            {name: 'stanley.hudson', role: 'Sales', company: 'FinanceCorp', domain: '@financecorp.com'},
+            {name: 'phyllis.vance', role: 'Sales', company: 'CraftsWorld', domain: '@craftsworld.com'},
+            {name: 'erin.hannon', role: 'Receptionist', company: 'PhoneCorp', domain: '@phonecorp.com'},
+            {name: 'andy.bernard', role: 'Sales', company: 'MusicInc', domain: '@musicinc.com'},
+            {name: 'darryl.philbin', role: 'Warehouse', company: 'ShippingCo', domain: '@shippingco.com'},
+            {name: 'meredith.palmer', role: 'Supplier Relations', company: 'TradeInc', domain: '@tradeinc.com'},
+            {name: 'creed.bratton', role: 'Quality Assurance', company: 'MysteryCo', domain: '@mysteryco.com'},
+            {name: 'holly.flax', role: 'HR', company: 'LoveInc', domain: '@loveinc.com'},
+            {name: 'gabe.lewis', role: 'Coordinator', company: 'CinemaCorp', domain: '@cinemacorp.com'},
+            {name: 'robert.california', role: 'CEO', company: 'ExecCorp', domain: '@execcorp.com'}
+        ];
+
+        // Randomly select a user from the userData array
+        var randomUser = userData[Math.floor(Math.random() * userData.length)];
+
+        // Initialize Pendo with the random user's details and the associated company
         pendo.initialize({
             visitor: {
-                id:              'alice.smith@nexatech.com',   // Required if user is logged in
-                email:        'alice.smith@nexatech.com',
-                // full_name:    // Recommended if using Pendo Feedback
-                 role:           'CEO'
-
-                // You can add any additional visitor level key-values here,
-                // as long as it's not one of the above reserved names.
+                id: randomUser.name + randomUser.domain,
+                email: randomUser.name + randomUser.domain,
+                role: randomUser.role
             },
-
             account: {
-                id:           'NexaTech' // Required if using Pendo Feedback
-                // name:         // Optional
-                // is_paying:    // Recommended if using Pendo Feedback
-                // monthly_value: // Optional
-                // planLevel:    // Optional
-                // planPrice:     // Optional
-                // creationDate: // Optional
-
-                // You can add any additional account level key-values here,
-                // as long as it's not one of the above reserved names.
+                id: randomUser.company
+                // You can add more account details if needed
             }
         });
-})('deb923d6-250c-486a-5f2c-9d3130e9fac9');
+
+    })('deb923d6-250c-486a-5f2c-9d3130e9fac9'); // Replace with your actual Pendo API Key
 </script>
 
 </head>
